@@ -16,7 +16,7 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST') &&
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
               'Content-Type: application/json',
-              'Content-Length: ' . strlen($data_json)
+              'Content-Length: ' . strlen($json)
       )
     );
 
@@ -24,7 +24,7 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST') &&
       throw new Exception($url . ' - ' . curl_error($ch));
     } else {
       $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-      if ($statusCode != '200') {
+      if ($httpCode != '200') {
         throw new Exception($url . ' Http code: ' . $httpCode);
       }
     }
